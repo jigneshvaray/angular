@@ -13,4 +13,6 @@ jobs:
       with:
        node-version: 12
     - run: npm ci
-    - run: node --version && npm -v 
+    - run: node --version && npm -v && pwd && ls
+    
+    
