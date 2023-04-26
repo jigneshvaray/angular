@@ -29,6 +29,7 @@ jobs:
        SSH_USER: ${{ secrets.SSH_USER }}
        SSH_HOST: ${{ secrets.SSH_HOST }}
       run: |
+       pwd && ls
        echo "$SSH_KEY" > Private_Key && sudo chmod 600 Private_Key
        scp -o StrictHostKeyChecking=no -i Private_Key rent-acar-front-end0.0.0.zip ${SSH_USER}@${SSH_HOST}:/home/ubuntu
        ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} "sudo su; sudo systemctl stop nginx" 
