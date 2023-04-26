@@ -36,4 +36,11 @@ jobs:
       uses: actions/download-artifact@v2.1.1
       with: 
         name: artifact-file
-    - run: pwd && ls
+    - name: Test SSH Connection.
+      env: 
+       SSH_KEY: ${{ secrets.SSH_KEY }}
+       SSH_USER: ${{ secrets.SSH_USER }}
+       SSH_HOST: ${{ secrets.SSH_HOST }}
+      run: |
+       echo "$SSH_KEY" > Private_Key && sudo chmod 600 Private_Key
+       ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} "sudo su; sudo systemctl stop nginx" 
