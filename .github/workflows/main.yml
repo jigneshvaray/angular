@@ -27,8 +27,8 @@ jobs:
         port: ${{ secrets.SSH_PORT }} 
         username: ${{ secrets.SSH_USER }} 
         key: ${{ secrets.SSH_KEY }} 
-        files: rent-acar-front-end0.0.0.zip
+        files: |
+            rent-acar-front-end0.0.0.zip
         remote-path: "/home/ubuntu/"
-        after-upload: sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
-    
+            
         
