@@ -13,6 +13,6 @@ jobs:
       uses: actions/setup-node@v3.4.1
       with:
         node-version: 12
-    - run: npm ci && npm run build:prod && pwd && ls
+    - run: npm ci && npm run build && pwd && ls
     
         
