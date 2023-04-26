@@ -14,5 +14,11 @@ jobs:
       with:
         node-version: 12
     - run: npm ci && npm run build && pwd && ls
+    - name: Zip dist files
+      id: zip
+      uses: Roslovets-Inc/zip-npm-files@v1
+      with:
+        files: dist
+    
     
         
