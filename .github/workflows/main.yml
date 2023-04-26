@@ -20,21 +20,11 @@ jobs:
       with:
         files: dist
     
-    - name: Deploy war file
-      uses: ilCollez/ssh-scp-deploy@v1.1.0
-      with:
-        host: ${{ secrets.SSH_HOST }} 
-        port: ${{ secrets.SSH_PORT }} 
-        username: ${{ secrets.SSH_USER }} 
-        key: ${{ secrets.SSH_KEY }} 
-        files: |
-            rent-acar-front-end0.0.0.zip
-        remote-path: "/home/ubuntu/" 
-        after-upload: |
-            pwd
-            sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
-            sudo mv /var/www/RentACar-FrontEnd /tmp/RentACar-FrontEnd.bck
-            sudo mv dist/RentACar-FrontEnd  /var/www/
-            sudo systemctl restart nginx
-            sudo rm -rf /home/ubuntu/*
+    - name: Deploy the zip folder to server.
+    - uses: actions/checkout@v3
+    - run: |
+       echo $SSH_KEY > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
+       ls 
+    
+    
         
