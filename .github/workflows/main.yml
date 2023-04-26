@@ -31,9 +31,10 @@ jobs:
             rent-acar-front-end0.0.0.zip
         remote-path: "/home/ubuntu/" 
         after-upload: |
+            pwd
             sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
             sudo mv /var/www/RentACar-FrontEnd /tmp/RentACar-FrontEnd.bck
-            sudo mv /dist/RentACar-FrontEnd  /var/www/
+            sudo mv dist/RentACar-FrontEnd  /var/www/
             sudo systemctl restart nginx
             sudo rm -rf /home/ubuntu/*
         
