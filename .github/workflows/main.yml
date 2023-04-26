@@ -29,6 +29,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }} 
         files: |
             rent-acar-front-end0.0.0.zip
-        remote-path: "/home/ubuntu/"
+        remote-path: "/home/ubuntu/" 
             
         
