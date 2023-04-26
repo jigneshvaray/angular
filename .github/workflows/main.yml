@@ -23,14 +23,14 @@ jobs:
         files: dist
     
     - uses: actions/checkout@v2
-    - name: Deploy the zip folder to serveer
+    - name: Test SSH Connection.
       env: 
-       ssh-key: ${{ secrets.SSH_KEY }}
-       ssh-user: ${{ secrets.SSH_USER }}
-       ssh-host: ${{ secrets.SSH_HOST }}
+       SSH_KEY: ${{ secrets.SSH_KEY }}
+       SSH_USER: ${{ secrets.SSH_USER }}
+       SSH_HOST: ${{ secrets.SSH_HOST }}
       run: |
-       echo "$ssh-key" > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
-       ssh -o StrictHostKeyChecking=no -i nginx-web-server.pem -t ${ssh-user}@${ssh-host} "sudo su; sudo systemctl stop nginx" 
+       echo "$SSH_KEY" > Private_Key && sudo chmod 600 Private_Key
+       ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} "sudo su; sudo systemctl stop nginx" 
     
     
         
