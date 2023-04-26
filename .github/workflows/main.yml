@@ -21,8 +21,6 @@ jobs:
       uses: Roslovets-Inc/zip-npm-files@v1
       with:
         files: dist
-    
-    - uses: actions/checkout@v2
     - name: Test deploy.
       env: 
        SSH_KEY: ${{ secrets.SSH_KEY }}
@@ -31,8 +29,7 @@ jobs:
       run: |
        pwd && ls
        echo "$SSH_KEY" > Private_Key && sudo chmod 600 Private_Key
-       scp -o StrictHostKeyChecking=no -i Private_Key rent-acar-front-end0.0.0.zip ${SSH_USER}@${SSH_HOST}:/home/ubuntu
        ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} "sudo su; sudo systemctl stop nginx" 
-    
+       scp -o StrictHostKeyChecking=no -i Private_Key rent-acar-front-end0.0.0.zip ${SSH_USER}@${SSH_HOST}:/home/ubuntu
     
         
