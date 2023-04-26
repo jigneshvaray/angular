@@ -1,9 +1,8 @@
 name: Angular Project
-
 on:
   push:
     branches: [ "main" ]
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,17 +20,19 @@ jobs:
       uses: Roslovets-Inc/zip-npm-files@v1
       with:
         files: dist
-    - name: Test deploy.
-      env: 
-       SSH_KEY: ${{ secrets.SSH_KEY }}
-       SSH_USER: ${{ secrets.SSH_USER }}
-       SSH_HOST: ${{ secrets.SSH_HOST }}
-      run: |
-       pwd && ls
-       echo "$SSH_KEY" > Private_Key && sudo chmod 600 Private_Key
-       ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} 'sudo systemctl stop nginx' 
-       scp -o StrictHostKeyChecking=no -i Private_Key rent-acar-front-end0.0.0.zip ${SSH_USER}@${SSH_HOST}:/home/ubuntu
-       ssh -o StrictHostKeyChecking=no -i Private_Key -t ${SSH_USER}@${SSH_HOST} "sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip; sudo mv /var/www/RentACar-FrontEnd /tmp/RentACar-FrontEnd.bck; sudo mv dist/RentACar-FrontEnd  /var/www/; sudo systemctl restart nginx; sudo rm -rf /home/ubuntu/*"
-       
     
-        
+    - name: Upload an artifact
+      uses: actions/upload-artifact@v3.1.2
+      with: 
+        name: artifact-file
+        path: rent-acar-front-end0.0.0.zip
+           
+  deploy:      
+    runs-on: ubuntu-latest    
+    environment: 'prod'
+    steps:   
+    - name: Download artifact
+      uses: actions/download-artifact@v2.1.1
+      with: 
+        name: artifact-file
+    - run: pwd && ls
