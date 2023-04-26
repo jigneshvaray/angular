@@ -20,5 +20,15 @@ jobs:
       with:
         files: dist
     
+    - name: Deploy war file
+      uses: ilCollez/ssh-scp-deploy@v1.1.0
+      with:
+        host: ${{ secrets.SSH_HOST }} 
+        port: ${{ secrets.SSH_PORT }} 
+        username: ${{ secrets.SSH_USER }} 
+        key: ${{ secrets.SSH_KEY }} 
+        files: rent-acar-front-end0.0.0.zip
+        remote-path: "/home/ubuntu/"
+        after-upload: sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
     
         
