@@ -20,6 +20,7 @@ jobs:
       uses: Roslovets-Inc/zip-npm-files@v1
       with:
         files: dist
+    - run: pwd && ls
     
     - name: Upload an artifact
       uses: actions/upload-artifact@v3.1.2
