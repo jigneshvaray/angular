@@ -23,9 +23,13 @@ jobs:
         files: dist
     
     - name: Deploy the zip folder to serveer
+      env: 
+       ssh-key: ${{ secrets.SSH_KEY }}
+       ssh-user: ${{ secrets.SSH_USER }}
+       ssh-host: ${{ secrets.SSH_HOST }}
       run: |
-       echo $SSH_KEY > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
-       ls 
+       echo $ssh-key > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
+       ssh -o StrictHostKeyChecking=no -i $ssh-key -t $ssh-host@$ssh-user "sudo su; sudo systemctl stop nginx" 
     
     
         
