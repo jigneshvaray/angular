@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-node@v3.4.1
       with:
         node-version: 12
-    - run: npm ci && npm run build && pwd && ls
+    - run: npm ci && npm run build --prod && pwd && ls
     - name: Zip dist files
       id: zip
       uses: Roslovets-Inc/zip-npm-files@v1
@@ -30,5 +30,6 @@ jobs:
         files: |
             rent-acar-front-end0.0.0.zip
         remote-path: "/home/ubuntu/" 
-            
+        after-upload: |
+            sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
         
