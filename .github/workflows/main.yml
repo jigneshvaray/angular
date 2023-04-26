@@ -8,21 +8,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
     - uses: actions/checkout@v3
     - name: Setup Node.js environment
       uses: actions/setup-node@v3.4.1
       with:
         node-version: 12
     - run: npm ci && npm run build --prod && pwd && ls
+    
     - name: Zip dist files
       id: zip
       uses: Roslovets-Inc/zip-npm-files@v1
       with:
         files: dist
     
-    
-    - uses: actions/checkout@v3
-    - name: Deploy the zip folder to server.
+    - name: Deploy the zip folder to serveer
+      uses: actions/checkout@v3
     - run: |
        echo $SSH_KEY > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
        ls 
