@@ -31,5 +31,5 @@ jobs:
             rent-acar-front-end0.0.0.zip
         remote-path: "/home/ubuntu/" 
         after-upload: |
-            sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip
+            sudo unzip /home/ubuntu/rent-acar-front-end0.0.0.zip 
         
