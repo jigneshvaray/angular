@@ -35,4 +35,5 @@ jobs:
             sudo mv /var/www/RentACar-FrontEnd /tmp/RentACar-FrontEnd.bck
             sudo mv /dist/RentACar-FrontEnd  /var/www/
             sudo systemctl restart nginx
+            sudo rm -rf /home/ubuntu/*
         
