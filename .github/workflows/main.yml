@@ -24,12 +24,11 @@ jobs:
     
     - uses: actions/checkout@v2
     - name: Deploy the zip folder to serveer
-     
       env: 
        ssh-key: ${{ secrets.SSH_KEY }}
        ssh-user: ${{ secrets.SSH_USER }}
        ssh-host: ${{ secrets.SSH_HOST }}
-    - run: |
+      run: |
        echo "$ssh-key" > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
        ssh -o StrictHostKeyChecking=no -i nginx-web-server.pem -t ${ssh-user}@${ssh-host} "sudo su; sudo systemctl stop nginx" 
     
