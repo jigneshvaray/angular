@@ -20,8 +20,9 @@ jobs:
       with:
         files: dist
     
-    - name: Deploy the zip folder to server.
+    
     - uses: actions/checkout@v3
+    - name: Deploy the zip folder to server.
     - run: |
        echo $SSH_KEY > nginx-web-server.pem && sudo chmod 600 nginx-web-server.pem
        ls 
