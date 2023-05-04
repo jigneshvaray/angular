@@ -11,7 +11,7 @@ phases:
   build:
     commands:
       - npm install
-      - npm build --prod
+      - npm build prod
        
   post_build:
     commands:
