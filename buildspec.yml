@@ -10,11 +10,13 @@ phases:
       - npm -v
   build:
     commands:
-      - echo Build started on `date`
+      - npm install
+      - npm build --prod
        
   post_build:
     commands:
-      - echo Build completed on `date`
+      - pwd
+      - ls
       
                  
 #artifacts:
